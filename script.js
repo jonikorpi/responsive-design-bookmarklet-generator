@@ -32,20 +32,47 @@ bm_ns.delete_row = function(e) {
 	$(e.target).closest(".row").remove();
 }
 
+
+
+
+
+
+
+
 bm_ns.generate_bookmarklet = function(highlight) {
-	var link = "javascript:document.write('<!DOCTYPE html><html><head>&lt;meta charset=&quot;utf-8&quot;><title>Responsive Design Testing</title><style>html{min-height: 100%;} body{ height: 100%; position: relative; margin: 0; overflow-x: scroll; background: #000; }.wrapper { width: 20000px; }.frame { float: left; background: #fff; position: relative; border-left: 6px solid rgb(158, 158, 158);}h2 { margin: 0; }iframe { margin: 0; border: none;}</style></head><body><div class=&quot;wrapper&quot;>";
-	$("#bm_generate .sortable .row").each(function() {
-		var width  = $(this).find(".col1 input").val();
-		var height = '100%';
-		var label  = $(this).find(".col3 input").val();
-		if (label) {
-			label = "(" + label + ")";
-		}
-		link += "<div class=&quot;frame&quot;>"
-					+ "<iframe src=&quot;' + window.location + '&quot; sandbox=&quot;allow-same-origin allow-forms&quot; seamless "
-					+ "width=&quot;" + width + "&quot; height=&quot;" + height + "&quot;></iframe></div>"
-	});
-	link += "</div></body></html>')";
+	var link = "\
+	javascript:document.write('\
+    <div id=&quot;rdtb-wrapper&quot;>\
+    	<style>\
+        html{height: 100% !important;} \
+        body {position: relative !important; height: 100% !important; padding: 0 !important; margin: 0 !important;} \
+        #rdtb-wrapper{ height: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: 0; overflow: auto; width: 1250em;}\
+        .rdtb-frame { float: left; background: #fff; position: relative; border-left: 6px solid rgb(158, 158, 158);}\
+        .rdtb-frame iframe { margin: 0; border: none;}\
+      </style>";
+  	
+  	$("#bm_generate .sortable .row").each(function() {
+  		var width  = $(this).find(".col1 input").val();
+  		var height = '100%';
+  		var label  = $(this).find(".col3 input").val();
+  		if (label) {
+  			label = "(" + label + ")";
+  		}
+  		link += "<div class=&quot;rdtb-frame&quot;>"
+  					+ "<iframe src=&quot;' + window.location + '&quot; allow-forms&quot; seamless "
+  					+ "width=&quot;" + width + "&quot; height=&quot;" + height + "&quot;></iframe></div>"
+  	});
+	
+  	link += "</div>\
+  ')";
+	
+	
+	
+	
+	
+	
+	
+	
 	$("#bookmarklet_link").html('<a href="' + link + '">Responsive Design Test</a>');
 
 	if (highlight) {
