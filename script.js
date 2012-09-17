@@ -56,7 +56,7 @@ bm_ns.generate_bookmarklet = function(highlight) {
       .rdtb-frame iframe { margin: 0; border: none;}\
     </style>";
     
-	// Add iframes based on selected sizes
+	// Add iframes to markup, based on selected sizes
 	$("#bm_generate .sortable .row").each(function() {
 		var width  = $(this).find(".col1 input").val();
 		var height = '100%';
@@ -67,10 +67,10 @@ bm_ns.generate_bookmarklet = function(highlight) {
     
   // Splurge everything into a script
   var link = 'javascript:' + 
-  'document.getElementsByTagName(body)[1]' +
+  'document.getElementsByTagName(&quot;body&quot;)[1]' +
     '.appendChild(' + 
       'document.createElement(&quot;div&quot;)' + 
-        '.setAttribute(&quot;id&quot;, &quot;rdtb-wrapper&quot;)' + 
+        '.setAttribute(&quot;id&quot;,&quot;rdtb-wrapper&quot;)' + 
         '.innerHTML(&quot;'+ markup +'&quot;)' + 
     ');';
 	
